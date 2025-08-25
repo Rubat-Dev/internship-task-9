@@ -9,7 +9,7 @@ const searchForm = document.getElementById('searchForm');
 const packageContainer = document.getElementById("packagesContainer");
 const slider = document.getElementById("testimonialSlider");
 const dots = document.querySelectorAll("[data-index]");
-
+const darkModeToggle = document.getElementById("darkModeToggle");
 // Mobile Menu Toggle
 mobileMenuButton.addEventListener("click", () => {
   mobileMenu.classList.toggle("max-h-0");
@@ -228,4 +228,20 @@ dots.forEach((dot) => {
   dot.addEventListener("click", () => {
     showSlide(parseInt(dot.dataset.index));
   });
+});
+
+
+// light/dark mode toggle
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark");
+}
+// Toggle on button click
+darkModeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+
+  if (document.body.classList.contains("dark")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
 });
