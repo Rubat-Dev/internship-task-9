@@ -51,9 +51,9 @@
       }
   </script>
   </head>
-  <body class="font-poppins bg-light text-gray-800">
+  <body class="font-poppins bg-light text-gray-800 dark:bg-gray-900 dark:text-white">
    <!-- header-section -->
-<header class="bg-white shadow-md fixed w-full z-50">
+<header class="bg-white shadow-xl fixed w-full z-50 dark:bg-gray-900">
   <div class="container mx-auto px-6 lg:px-12 py-4 flex justify-between items-center">
     <!-- Logo -->
     <div class="flex items-center">
@@ -64,11 +64,11 @@
 
     <!-- Desktop Menu -->
     <nav class="hidden lg:flex space-x-10">
-      <a href="#home" class="nav-link text-gray-700 hover:text-primary transition-colors duration-300">Home</a>
-      <a href="#destinations" class="nav-link text-gray-700 hover:text-primary transition-colors duration-300">Destinations</a>
-      <a href="#packages" class="nav-link text-gray-700 hover:text-primary transition-colors duration-300">Packages</a>
-      <a href="#testimonials" class="nav-link text-gray-700 hover:text-primary transition-colors duration-300">Testimonials</a>
-      <a href="#contact" class="nav-link text-gray-700 hover:text-primary transition-colors duration-300">Contact</a>
+      <a href="#home" class="nav-link text-gray-700 hover:text-primary transition-colors duration-300 dark:text-gray-200">Home</a>
+      <a href="#destinations" class="nav-link text-gray-700 hover:text-primary transition-colors duration-300 dark:text-gray-200">Destinations</a>
+      <a href="#packages" class="nav-link text-gray-700 hover:text-primary transition-colors duration-300 dark:text-gray-200">Packages</a>
+      <a href="#testimonials" class="nav-link text-gray-700 hover:text-primary transition-colors duration-300 dark:text-gray-200">Testimonials</a>
+      <a href="#contact" class="nav-link text-gray-700 hover:text-primary transition-colors duration-300 dark:text-gray-200">Contact</a>
     </nav>
 
     <!-- Buttons -->
@@ -87,20 +87,20 @@
 
   <!-- Mobile Menu -->
   <div id="mobileMenu" class="bg-white shadow-lg lg:hidden px-5 max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
-    <a href="#home" class="block py-3 text-gray-700 hover:text-primary transition-colors duration-300 border-b border-gray-100">
-      <i class="fas fa-home mr-2"></i> Home
+    <a href="#home" class="dark:text-white block py-3 text-gray-700 hover:text-primary transition-colors duration-300 border-b border-gray-100">
+      <i class="fas fa-home mr-2 dark:text-white"></i> Home
     </a>
-    <a href="#destinations" class="block py-3 text-gray-700 hover:text-primary transition-colors duration-300 border-b border-gray-100">
-      <i class="fas fa-map-marker-alt mr-2"></i> Destinations
+    <a href="#destinations" class="dark:text-white block py-3 text-gray-700 hover:text-primary transition-colors duration-300 border-b border-gray-100">
+      <i class="fas fa-map-marker-alt mr-2 dark:text-white"></i> Destinations
     </a>
-    <a href="#packages" class="block py-3 text-gray-700 hover:text-primary transition-colors duration-300 border-b border-gray-100">
-      <i class="fas fa-suitcase mr-2"></i> Packages
+    <a href="#packages" class="dark:text-white block py-3 text-gray-700 hover:text-primary transition-colors duration-300 border-b border-gray-100">
+      <i class="fas fa-suitcase mr-2 dark:text-white"></i> Packages
     </a>
-    <a href="#testimonials" class="block py-3 text-gray-700 hover:text-primary transition-colors duration-300 border-b border-gray-100">
-      <i class="fas fa-star mr-2"></i> Testimonials
+    <a href="#testimonials" class="dark:text-white block py-3 text-gray-700 hover:text-primary transition-colors duration-300 border-b border-gray-100">
+      <i class="fas fa-star mr-2 dark:text-white"></i> Testimonials
     </a>
-    <a href="#contact" class="block py-3 text-gray-700 hover:text-primary transition-colors duration-300 border-b border-gray-100">
-      <i class="fas fa-phone mr-2"></i> Contact
+    <a href="#contact" class="dark:text-white block py-3 text-gray-700 hover:text-primary transition-colors duration-300 border-b border-gray-100">
+      <i class="fas fa-phone mr-2 dark:text-white"></i> Contact
     </a>
     <button class="my-4 btn bg-primary text-white w-full py-3 rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300 transform hover:scale-105">
       Book Now
@@ -108,7 +108,7 @@
   </div>
 </header>
  <!-- Hero Section -->
- <section class="hero-bg pt-40 pb-32 text-center text-white">
+ <section class="dark:text-gray-100 hero-bg pt-40 pb-32 text-center text-white">
   <div class="container mx-auto px-4">
     <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Discover the World with ExploreNow</h1>
     <p class="text-md sm:text-xl mb-12 max-w-2xl mx-auto">Find and book your perfect vacation with our travel experts. Explore the most beautiful places on earth.</p>
@@ -149,11 +149,11 @@
   </div>
  </section>
   <!-- Destinations Section -->
-  <section id="destinations" class="py-20 bg-gradient-to-b from-gray-50 to-white">
+  <section id="destinations" class="py-20 dark:bg-gray-800 dark:text-gray-200">
     <div class="container mx-auto px-4">
       <div class="text-center mb-16">
           <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Popular Destinations</h2>
-          <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-lg">Explore the most beautiful places on earth with our curated selection of dream destinations.</p>
+          <p class="text-gray-600 max-w-2xl mx-auto text-sm sm:text-lg dark:text-gray-200">Explore the most beautiful places on earth with our curated selection of dream destinations.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="destinationsContainer">
       </div>
@@ -164,23 +164,23 @@
     </div>
   </section>
 <!-- Packages Section -->
-<section id="packages" class="py-20 bg-white">
+<section id="packages" class="py-20 bg-white dark:bg-gray-800 dark:text-gray-200">
   <div class="container mx-auto px-4">
     <div class="text-center mb-16">
        <h2 class="text-3xl md:text-4xl font-bold mb-4 font-bold mb-4">Travel Packages</h2>
-       <p class="text-gray-600 max-w-2xl mx-auto sm:text-lg text-sm">Our carefully curated packages offer the perfect blend of adventure, relaxation, and cultural experiences.</p>
+       <p class="text-gray-600 max-w-2xl mx-auto sm:text-lg text-sm dark:text-gray-200">Our carefully curated packages offer the perfect blend of adventure, relaxation, and cultural experiences.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="packagesContainer">
     </div>
   <div class="text-center mt-12">
-    <button class="px-8 py-3 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition" id="packageBtn">View All Packages <i class="fas fa-arrow-right ml-2"></i>
+    <button class="dark:bg-primary dark:text-white px-8 py-3 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition" id="packageBtn">View All Packages <i class="fas fa-arrow-right ml-2"></i>
     </button>
   </div>
   </div>
 </section>
 <!-- Testimonials section -->
   <!-- Swipper Js -->
-  <section id="testimonials" class="py-20 bg-gradient-to-b from-gray-100 to-white py-16">
+  <section id="testimonials" class="py-20 dark:bg-gray-800 dark:text-gray-200 py-16">
     <div class="max-w-5xl mx-auto text-center">
       <h2 class="text-2xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
   

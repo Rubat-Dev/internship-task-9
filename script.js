@@ -14,6 +14,7 @@ const darkModeToggle = document.getElementById("darkModeToggle");
 mobileMenuButton.addEventListener("click", () => {
   mobileMenu.classList.toggle("max-h-0");
   mobileMenu.classList.toggle("max-h-[600px]");
+  mobileMenu.classList.toggle("dark:bg-gray-800");
   mobileMenuIcon.classList.toggle("fa-bars");
   mobileMenuIcon.classList.toggle("fa-times");
 });
@@ -123,7 +124,7 @@ function renderCard(dest) {
         </div>
       </div>
       <div class="p-6">
-        <h3 class="text-xl font-bold mb-2">${dest.title}</h3>
+        <h3 class="text-xl font-bold mb-2 dark:text-gray-600">${dest.title}</h3>
         <p class="text-gray-700 mb-4">${dest.desc}</p>
         <div class="flex justify-between items-center">
           <span class="text-primary font-bold">${dest.price}</span>
@@ -239,9 +240,14 @@ if (localStorage.getItem("theme") === "dark") {
 darkModeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
 
+  const icon = darkModeToggle.querySelector("i");
   if (document.body.classList.contains("dark")) {
     localStorage.setItem("theme", "dark");
+    icon.classList.remove("fa-moon");
+    icon.classList.add("fa-sun");
   } else {
     localStorage.setItem("theme", "light");
+    icon.classList.remove("fa-sun");
+    icon.classList.add("fa-moon");
   }
 });
