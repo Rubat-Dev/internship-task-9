@@ -5,11 +5,13 @@ const mobileMenuIcon = mobileMenuButton.querySelector("i");
 const container = document.getElementById("destinationsContainer");
 const destinationBtn = document.getElementById("destinationBtn");
 const packageBtn = document.getElementById("packageBtn");
-const searchForm = document.getElementById('searchForm');
 const packageContainer = document.getElementById("packagesContainer");
 const slider = document.getElementById("testimonialSlider");
 const dots = document.querySelectorAll("[data-index]");
 const darkModeToggle = document.getElementById("darkModeToggle");
+const searchForm = document.getElementById('searchForm');
+const errorMsgs = document.querySelectorAll('.error-msg');
+
 // Mobile Menu Toggle
 mobileMenuButton.addEventListener("click", () => {
   mobileMenu.classList.toggle("max-h-0");
@@ -19,15 +21,6 @@ mobileMenuButton.addEventListener("click", () => {
   mobileMenuIcon.classList.toggle("fa-times");
 });
 
-// bg-color-list
-const bgColors = [
-  "from-blue-50 to-indigo-50",
-  "from-pink-50 to-rose-100",
-  "from-green-50 to-emerald-100",
-  "from-yellow-50 to-orange-100",
-  "from-purple-50 to-fuchsia-100  ",
-  "from-gray-50 to-slate-100"
-];
 // destinations-list
 const destinations = [
   {
@@ -35,42 +28,42 @@ const destinations = [
     desc: "Experience the perfect blend of culture, beaches, and nightlife in the Island.",
     price: "$899",
     rating: "4.9",
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop"
   },
   {
     title: "Paris, France",
     desc: "Discover the city of love with its iconic Eiffel Tower and world-class cuisine.",
     price: "$1,199",
     rating: "4.8",
-    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop"
   },
   {
     title: "Santorini, Greece",
     desc: "Enjoy stunning sunsets and white-washed buildings in this Aegean paradise.",
     price: "$1,099",
     rating: "4.9",
-    image: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?ixlib=rb-4.0.3&auto=format&fit=crop"
   },
   {
     title: "Kyoto, Japan",
     desc: "Step into ancient temples, tranquil gardens, and rich traditions of Japan.",
     price: "$999",
     rating: "4.7",
-    image: "https://images.unsplash.com/photo-1554797589-7241bb691973?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1554797589-7241bb691973?ixlib=rb-4.0.3&auto=format&fit=crop"
   },
   {
     title: "Dubai, UAE",
     desc: "Explore luxury shopping, ultramodern architecture, and desert adventures.",
     price: "$1,299",
     rating: "4.8",
-    image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&auto=format&fit=crop"
   },
   {
     title: "New York, USA",
     desc: "The city that never sleeps — lights, skyscrapers, and endless energy.",
     price: "$1,399",
     rating: "4.6",
-    image: "https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?ixlib=rb-4.0.3&auto=format&fit=crop"
   }
 ];
 
@@ -118,7 +111,9 @@ function renderCard(dest) {
   return `
     <div class="destination-card bg-white rounded-2xl overflow-hidden shadow-lg">
       <div class="relative overflow-hidden">
-        <img src=${dest.image} alt="${dest.title}" class="w-full h-48 object-cover transform hover:scale-110 transition duration-700">
+        <img src="${dest.image}" srcset="${dest.image}&w=400&q=70&fm=webp 400w,${dest.image}&w=800&q=80&fm=webp 800w,
+          ${dest.image}&w=1200&q=80&fm=webp 1200w" sizes="(max-width: 600px) 400px, (max-width: 1024px) 800px,1200px" alt="${dest.title}"
+         class="w-full h-48 object-cover transform hover:scale-110 transition duration-700">
         <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm">
           <i class="fas fa-star mr-1"></i> ${dest.rating}
         </div>
@@ -146,27 +141,85 @@ destinationBtn.addEventListener("click", () => {
   destinationBtn.style.display = "none";
 })
 
- // Form Validation
- searchForm.addEventListener('submit', (e) => {
-  e.preventDefault()
-  const destination = e.target.elements[0].value.trim();
-  const date = e.target.elements[1].value.trim();
-  const budget = e.target.elements[2].value.trim();
-  if(!destination) {
-    alert('Please enter a destination');
-    return;
+searchForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  // Clear previous errors
+  errorMsgs.forEach(err => err.textContent = '');
+
+  const destination = e.target.elements['destination'].value.trim();
+  const date = e.target.elements['date'].value.trim();
+  const budget = e.target.elements['budget'].value.trim();
+
+  let isValid = true;
+
+  // ✅ Validate Destination
+  if (!destination) {
+    errorMsgs[0].textContent = '❌ Please enter a destination';
+    isValid = false;
+  } else if (destination.length < 3) {
+    errorMsgs[0].textContent = '❌ Must be at least 3 characters';
+    isValid = false;
+  } else if (!/^[a-zA-Z\s]+$/.test(destination)) {
+    errorMsgs[0].textContent = '❌ Only letters and spaces allowed';
+    isValid = false;
   }
-  if(!date) {
-    alert('Please enter a date');
-    return;
+  console.log(destination)
+  // ✅ Validate Date
+  if (!date) {
+    errorMsgs[1].textContent = '❌ Please select a travel date';
+    isValid = false;
+  } else {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // current date without time
+    const travelDate = new Date(date);
+    console.log(travelDate);
+
+    if (travelDate < today) {
+      errorMsgs[1].textContent = '❌ Date cannot be in the past';
+      isValid = false;
+    }
   }
-  alert(`Searching for trips to ${destination} on ${date} with budget $${budget}`);
- });
+
+  // ✅ Validate Budget
+  if (!budget) {
+    errorMsgs[2].textContent = '❌ Please enter your budget';
+    isValid = false;
+  } else if (isNaN(budget)) {
+    errorMsgs[2].textContent = '❌ Budget must be a number';
+    isValid = false;
+  } else if (budget <= 0) {
+    errorMsgs[2].textContent = '❌ Must be greater than 0';
+    isValid = false;
+  } else if (budget < 100 || budget > 50000) {
+    errorMsgs[2].textContent = '❌ Must be between $100 and $50,000';
+    isValid = false;
+  }
+  console.log(budget)
+
+  // ✅ If all validations pass
+  if (isValid) {
+    showPopup(destination, date, budget);
+  }
+});
+
+function showPopup(destination, date, budget) {
+  document.getElementById('popupMessage').textContent =
+    `Searching for trips to ${destination} on ${date} with a budget of $${budget}`;
+  document.getElementById('successPopup').classList.remove('hidden');
+}
+
+function closePopup() {
+  document.getElementById('successPopup').classList.add('hidden');
+  searchForm.reset(); // ✅ form reset after popup close
+  errorMsgs.forEach(err => err.textContent = ''); // ✅ errors clear
+}
+
 
 //  Function to render a destination card
 function renderPackageCard(pkg, index) {
- const bg = bgColors[index % bgColors.length];
-  return `<div class="package-card bg-gradient-to-br ${bg}  rounded-2xl overflow-hidden shadow-lg">
+  const bg = bgColors[index % bgColors.length];
+  return `<div class="package-card bg-gradient-to-br from-blue-50 to-indigo-50  rounded-2xl overflow-hidden shadow-xl">
   <div class="p-6">
       <div class="flex justify-between items-center mb-4">
           <h3 class="text-xl font-bold">${pkg.title}</h3>
@@ -196,7 +249,7 @@ packageContainer.innerHTML = packages.slice(0, 3).map(renderPackageCard).join(""
 // On button click show all
 packageBtn.addEventListener('click', () => {
   packageContainer.innerHTML = packages.map(renderPackageCard).join("");
-  packageBtn.style.display = "none"; 
+  packageBtn.style.display = "none";
 });
 
 // Testimonials slider
